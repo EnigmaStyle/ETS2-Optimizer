@@ -16,6 +16,10 @@ Tool open source per ottimizzare automaticamente il `config.cfg` di Euro Truck S
 - Non aggiunge eccezioni antivirus, non modifica servizi di sistema, non tocca altri programmi.
 - Non richiede privilegi di amministratore.
 
+## Download
+
+I binari precompilati sono disponibili nella pagina [Releases](https://github.com/EnigmaStyle/ETS2-Optimizer/releases).
+
 ## Build
 
 Richiede [.NET 8 SDK](https://dotnet.microsoft.com/download).
@@ -27,7 +31,7 @@ dotnet run --project src/Ets2Optimizer
 
 ## Firma del codice
 
-I binari delle release sono firmati tramite [SignPath.io](https://signpath.io) (programma gratuito per progetti open source). Vedi `.github/workflows/build.yml`.
+Questo progetto ha richiesto un certificato di firma del codice gratuito tramite [SignPath Foundation](https://signpath.org), il programma no-profit di SignPath per progetti open source. Se e quando la candidatura verrà approvata, le release verranno firmate automaticamente da SignPath tramite la pipeline in `.github/workflows/build.yml`.
 
 ## Licenza
 
