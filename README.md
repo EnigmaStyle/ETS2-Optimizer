@@ -18,7 +18,18 @@ Tool open source per ottimizzare automaticamente il `config.cfg` di Euro Truck S
 
 ## Download
 
-I binari precompilati sono disponibili nella pagina [Releases](https://github.com/EnigmaStyle/ETS2-Optimizer/releases).
+I binari precompilati sono disponibili nella pagina [Releases](https://github.com/EnigmaStyle/ETS2-Optimizer/releases):
+
+- **Ets2Optimizer.exe** — interfaccia grafica (consigliata per la maggior parte degli utenti)
+- **Ets2Optimizer.Cli.exe** — versione da riga di comando, utile per script/automazione
+
+Per ciascuna è disponibile una variante *standalone* (nessuna dipendenza esterna, file più pesante) e una *framework-dependent* (richiede [.NET 8 Runtime](https://dotnet.microsoft.com/download) già installato, file più leggero).
+
+## Struttura del progetto
+
+- `src/Ets2Optimizer.Core` — logica condivisa: rilevamento hardware, individuazione config.cfg, motore di regole
+- `src/Ets2Optimizer` — interfaccia grafica (WPF)
+- `src/Ets2Optimizer.Cli` — interfaccia a riga di comando
 
 ## Build
 
@@ -26,7 +37,8 @@ Richiede [.NET 8 SDK](https://dotnet.microsoft.com/download).
 
 ```
 dotnet build
-dotnet run --project src/Ets2Optimizer
+dotnet run --project src/Ets2Optimizer       # GUI
+dotnet run --project src/Ets2Optimizer.Cli   # CLI
 ```
 
 ## Firma del codice

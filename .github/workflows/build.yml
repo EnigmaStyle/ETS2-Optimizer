@@ -23,8 +23,11 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Publish
-        run: dotnet publish src/Ets2Optimizer -c Release -r win-x64 --self-contained false -o publish
+      - name: Publish GUI
+        run: dotnet publish src/Ets2Optimizer -c Release -r win-x64 --self-contained false -o publish/gui
+
+      - name: Publish CLI
+        run: dotnet publish src/Ets2Optimizer.Cli -c Release -r win-x64 --self-contained false -o publish/cli
 
       # La firma del codice richiede un certificato configurato come secret del repository
       # (es. tramite il servizio gratuito SignPath.io per progetti open source).

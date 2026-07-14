@@ -4,3 +4,5 @@ obj/
 .vs/
 /publish/
 /publish-standalone/
+/publish-gui/
+/publish-gui-standalone/
