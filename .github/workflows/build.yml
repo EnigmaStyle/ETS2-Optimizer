@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish src/Ets2Optimizer -c Release -r win-x64 --self-contained false -o publish
+
+      # La firma del codice richiede un certificato configurato come secret del repository
+      # (es. tramite il servizio gratuito SignPath.io per progetti open source).
+      # Finché il certificato non è configurato, questo step viene saltato senza bloccare la build.
+      - name: Sign binary (SignPath)
+        if: ${{ vars.SIGNPATH_ENABLED == 'true' }}
+        uses: signpath/github-action-submit-signing-request@v1
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORG_ID }}
+          project-slug: ets2-optimizer
+          signing-policy-slug: release-signing
+          artifact-configuration-slug: ets2-optimizer-exe
+          github-artifact-id: ${{ steps.upload-artifact.outputs.artifact-id }}
+
+      - name: Upload artifact
+        id: upload-artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ets2Optimizer-win-x64
+          path: publish/
