@@ -8,6 +8,7 @@
     <RootNamespace>Ets2Optimizer</RootNamespace>
     <AssemblyName>Ets2Optimizer</AssemblyName>
     <Platforms>x64</Platforms>
+    <ApplicationIcon>Assets\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
