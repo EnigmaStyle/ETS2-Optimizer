@@ -79,6 +79,21 @@ public partial class MainWindow : Window
         new InstructionsWindow { Owner = this }.ShowDialog();
     }
 
+    private void RestoreBackupButton_Click(object sender, RoutedEventArgs e)
+    {
+        if (_configPath is null) return;
+
+        var window = new RestoreWindow(_configPath) { Owner = this };
+        var restored = window.ShowDialog();
+
+        if (restored == true)
+        {
+            StatusText.Text = window.StatusMessage;
+            ApplyButton.IsEnabled = false;
+            ChangesList.ItemsSource = null;
+        }
+    }
+
     private void AnalyzeButton_Click(object sender, RoutedEventArgs e)
     {
         if (_configPath is null)

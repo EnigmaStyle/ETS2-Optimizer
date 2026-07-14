@@ -9,8 +9,8 @@ Console.WriteLine("  1. Chiudi Euro Truck Simulator 2 / American Truck Simulator
 Console.WriteLine("     (il gioco riscrive config.cfg alla chiusura, sovrascrivendo le modifiche fatte ora).");
 Console.WriteLine("  2. Il programma rileva GPU/CPU/RAM e calcola le modifiche proposte (nessuna scrittura ancora).");
 Console.WriteLine("  3. Conferma quando richiesto: verrà creato prima un backup con data e ora, poi il file viene scritto.");
-Console.WriteLine("  4. Avvia il gioco e controlla gli FPS. Se qualcosa non convince, chiudi il gioco e ripristina");
-Console.WriteLine("     il backup rinominandolo in config.cfg (si trova nella stessa cartella).");
+Console.WriteLine("  4. Avvia il gioco e controlla gli FPS. Se qualcosa non convince, chiudi il gioco e rilancia");
+Console.WriteLine("     questo strumento con l'opzione --restore per scegliere un backup da ripristinare.");
 Console.WriteLine("  5. Puoi anche copiare i comandi di avvio Steam consigliati, mostrati alla fine.");
 Console.WriteLine();
 
@@ -42,6 +42,11 @@ if (GameProcessChecker.IsGameRunning())
     Console.WriteLine("Il gioco è aperto: ETS2 riscrive config.cfg quando lo chiudi, sovrascrivendo qualsiasi");
     Console.WriteLine("modifica fatta ora. Chiudi il gioco e riavvia questo strumento.");
     return 1;
+}
+
+if (args.Contains("--restore", StringComparer.OrdinalIgnoreCase))
+{
+    return RunRestoreFlow(configPath);
 }
 
 Console.Write("Vuoi procedere con l'ottimizzazione? Verrà creato un backup automatico. [s/N] ");
@@ -86,3 +91,32 @@ foreach (var (flag, reason) in LaunchOptionsAdvisor.Explanations)
     Console.WriteLine($"    {flag}: {reason}");
 }
 return 0;
+
+static int RunRestoreFlow(string configPath)
+{
+    var backups = ConfigLocator.ListBackups(configPath);
+    if (backups.Count == 0)
+    {
+        Console.WriteLine("Nessun backup trovato in questa cartella.");
+        return 1;
+    }
+
+    Console.WriteLine();
+    Console.WriteLine("Backup disponibili (dal più recente):");
+    for (var i = 0; i < backups.Count; i++)
+    {
+        Console.WriteLine($"  [{i + 1}] {Path.GetFileName(backups[i])}");
+    }
+
+    Console.Write($"Quale vuoi ripristinare? [1-{backups.Count}, vuoto per annullare] ");
+    var choice = Console.ReadLine();
+    if (!int.TryParse(choice, out var index) || index < 1 || index > backups.Count)
+    {
+        Console.WriteLine("Operazione annullata.");
+        return 0;
+    }
+
+    var preRestoreBackup = ConfigLocator.RestoreBackup(configPath, backups[index - 1]);
+    Console.WriteLine($"Backup ripristinato. Lo stato precedente è stato salvato in: {preRestoreBackup}");
+    return 0;
+}

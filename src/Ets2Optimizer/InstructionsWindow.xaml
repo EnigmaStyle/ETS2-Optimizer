@@ -67,7 +67,7 @@
                 <TextBlock Style="{StaticResource StepBody}" Text="Ti verrà chiesta una conferma esplicita. Prima di scrivere qualsiasi modifica, il programma crea sempre una copia di backup con data e ora (es. config_backup_20260714_165551.cfg) nella stessa cartella del config.cfg." />
 
                 <TextBlock Style="{StaticResource StepTitle}" Text="5. Avvia il gioco e verifica gli FPS" />
-                <TextBlock Style="{StaticResource StepBody}" Text="Se qualcosa non ti convince (grafica troppo bassa, troppo alta, crash), chiudi il gioco e ripristina il backup: rinomina il file config_backup_*.cfg in config.cfg, sovrascrivendo quello modificato." />
+                <TextBlock Style="{StaticResource StepBody}" Text="Se qualcosa non ti convince (grafica troppo bassa, troppo alta, crash), chiudi il gioco e premi &quot;Ripristina backup&quot; nella finestra principale: scegli il backup dalla lista e conferma. Anche lo stato che stai sostituendo viene salvato automaticamente, quindi puoi tornare indietro in ogni momento." />
 
                 <TextBlock Style="{StaticResource StepTitle}" Text="6. (Facoltativo) Copia i comandi di avvio Steam" />
                 <TextBlock Style="{StaticResource StepBody}" Text="Nella card &quot;Comandi di avvio Steam consigliati&quot; premi &quot;Copia&quot;, poi in Steam: tasto destro su Euro Truck Simulator 2 → Proprietà → Opzioni di avvio → incolla (Ctrl+V). Il programma non modifica mai Steam: sta a te incollarli." />

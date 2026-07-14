@@ -159,6 +159,7 @@
 
         <!-- Buttons -->
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,0,12">
+            <Button x:Name="RestoreBackupButton" Content="Ripristina backup" Style="{StaticResource PrimaryButton}" Background="#2A3560" Click="RestoreBackupButton_Click" Margin="0,0,10,0" />
             <Button x:Name="AnalyzeButton" Content="Rileva ed Analizza" Style="{StaticResource PrimaryButton}" Click="AnalyzeButton_Click" Margin="0,0,10,0" />
             <Button x:Name="ApplyButton" Content="Applica ottimizzazione" Style="{StaticResource PrimaryButton}" Click="ApplyButton_Click" IsEnabled="False" />
         </StackPanel>

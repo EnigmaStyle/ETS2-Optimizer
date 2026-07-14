@@ -10,6 +10,8 @@ Tool open source per ottimizzare automaticamente il `config.cfg` di Euro Truck S
 4. Applica un profilo di ottimizzazione (Low / Mid / High) scelto in base all'hardware rilevato, regolando risoluzione interna, ombre, riflessi, densità traffico/vegetazione, LOD.
 5. Mostra un report di cosa è stato cambiato, valore per valore.
 6. Suggerisce comandi di avvio Steam sicuri (es. `-nointro`), da incollare manualmente in Steam → Proprietà → Opzioni di avvio.
+7. Permette di **ripristinare un backup precedente** con un click (GUI) o con `--restore` (CLI), salvando comunque lo stato corrente prima di sovrascrivere.
+8. Include una guida "Come si usa" integrata (mostrata al primo avvio e richiamabile in ogni momento).
 
 ## Nota importante: config.cfg e gioco aperto
 
