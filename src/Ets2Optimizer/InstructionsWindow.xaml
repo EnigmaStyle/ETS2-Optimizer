@@ -74,6 +74,9 @@
 
                 <TextBlock Style="{StaticResource StepTitle}" Text="Dove trovo i backup?" />
                 <TextBlock Style="{StaticResource StepBody}" Text="Nella stessa cartella del config.cfg, di solito Documenti\Euro Truck Simulator 2\ (o American Truck Simulator\). Ogni backup ha un nome con data e ora, quindi puoi tenerne più di uno senza sovrascriverli." />
+
+                <TextBlock Style="{StaticResource StepTitle}" Text="Serve rivedere questa guida?" />
+                <TextBlock Style="{StaticResource StepBody}" Text="Premi in qualsiasi momento il pulsante &quot;? Come si usa&quot; in alto a destra nella finestra principale: questa guida si riapre senza bisogno di riavviare il programma." />
             </StackPanel>
         </ScrollViewer>
 
