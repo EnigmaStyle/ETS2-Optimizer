@@ -41,9 +41,19 @@ public partial class MainWindow : Window
         _configPath = ConfigLocator.FindConfigFile();
         ConfigPathText.Text = _configPath ?? "Nessun file config.cfg trovato. Avvia il gioco almeno una volta.";
 
+        LaunchOptionsText.Text = LaunchOptionsAdvisor.RecommendedFor(_tier);
+
+        GameRunningWarning.Visibility = GameProcessChecker.IsGameRunning() ? Visibility.Visible : Visibility.Collapsed;
+
         StatusText.Text = _configPath is null
             ? "Impossibile procedere: config.cfg non trovato."
             : "Premi \"Rileva ed Analizza\" per calcolare le modifiche proposte.";
+    }
+
+    private void CopyLaunchOptions_Click(object sender, RoutedEventArgs e)
+    {
+        Clipboard.SetText(LaunchOptionsText.Text);
+        StatusText.Text = "Comandi di avvio copiati negli appunti. Incollali in Steam → Proprietà → Opzioni di avvio.";
     }
 
     private void AnalyzeButton_Click(object sender, RoutedEventArgs e)
@@ -76,6 +86,17 @@ public partial class MainWindow : Window
     private void ApplyButton_Click(object sender, RoutedEventArgs e)
     {
         if (_configPath is null || _newLines is null || _pendingChanges.Count == 0) return;
+
+        if (GameProcessChecker.IsGameRunning())
+        {
+            MessageBox.Show(
+                "Il gioco è aperto. ETS2 riscrive config.cfg quando lo chiudi, sovrascrivendo qualsiasi modifica fatta ora. Chiudi il gioco e riprova.",
+                "Gioco in esecuzione",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+            GameRunningWarning.Visibility = Visibility.Visible;
+            return;
+        }
 
         var result = MessageBox.Show(
             $"Verranno applicate {_pendingChanges.Count} modifiche a:\n{_configPath}\n\nVerrà creato un backup automatico prima di scrivere. Continuare?",

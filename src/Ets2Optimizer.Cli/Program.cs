@@ -26,6 +26,15 @@ if (configPath is null)
 }
 
 Console.WriteLine($"File trovato: {configPath}");
+
+if (GameProcessChecker.IsGameRunning())
+{
+    Console.WriteLine();
+    Console.WriteLine("Il gioco è aperto: ETS2 riscrive config.cfg quando lo chiudi, sovrascrivendo qualsiasi");
+    Console.WriteLine("modifica fatta ora. Chiudi il gioco e riavvia questo strumento.");
+    return 1;
+}
+
 Console.Write("Vuoi procedere con l'ottimizzazione? Verrà creato un backup automatico. [s/N] ");
 var answer = Console.ReadLine();
 if (!string.Equals(answer?.Trim(), "s", StringComparison.OrdinalIgnoreCase))
@@ -59,4 +68,12 @@ foreach (var change in changes)
 
 Console.WriteLine();
 Console.WriteLine("Fatto. Se qualcosa non va, ripristina il backup sovrascrivendo config.cfg.");
+Console.WriteLine();
+Console.WriteLine("Suggerimento: puoi anche aggiungere questi comandi di avvio in Steam");
+Console.WriteLine("(tasto destro su ETS2 > Proprietà > Opzioni di avvio):");
+Console.WriteLine($"  {LaunchOptionsAdvisor.RecommendedFor(tier)}");
+foreach (var (flag, reason) in LaunchOptionsAdvisor.Explanations)
+{
+    Console.WriteLine($"    {flag}: {reason}");
+}
 return 0;

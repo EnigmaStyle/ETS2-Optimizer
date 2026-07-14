@@ -9,12 +9,18 @@ Tool open source per ottimizzare automaticamente il `config.cfg` di Euro Truck S
 3. Crea **sempre** un backup con timestamp prima di modificare qualsiasi file.
 4. Applica un profilo di ottimizzazione (Low / Mid / High) scelto in base all'hardware rilevato, regolando risoluzione interna, ombre, riflessi, densità traffico/vegetazione, LOD.
 5. Mostra un report di cosa è stato cambiato, valore per valore.
+6. Suggerisce comandi di avvio Steam sicuri (es. `-nointro`), da incollare manualmente in Steam → Proprietà → Opzioni di avvio.
+
+## Nota importante: config.cfg e gioco aperto
+
+ETS2/ATS tengono le impostazioni grafiche in memoria mentre giocate e **riscrivono `config.cfg` su disco quando chiudete il gioco**, sovrascrivendo qualsiasi modifica esterna fatta nel frattempo. Per questo il tool rileva se il gioco è in esecuzione (processo `eurotrucks2`/`amtrucks`) e blocca l'applicazione delle modifiche finché non lo chiudete.
 
 ## Cosa NON fa
 
 - Non modifica impostazioni VR/OpenXR/OpenVR, multimonitor o stereo manuale (troppo rischioso senza sapere se l'utente le usa).
 - Non aggiunge eccezioni antivirus, non modifica servizi di sistema, non tocca altri programmi.
 - Non richiede privilegi di amministratore.
+- Non modifica mai le opzioni di avvio di Steam: le suggerisce soltanto, sta all'utente incollarle.
 
 ## Download
 
