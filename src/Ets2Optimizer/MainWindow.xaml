@@ -70,13 +70,20 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,20">
-            <Image Source="Assets/icon.ico" Width="40" Height="40" Margin="0,0,12,0" />
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="ETS2 Optimizer" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" />
-                <TextBlock Text="Ottimizzazione automatica del config.cfg in base al tuo hardware" FontSize="12" Foreground="{StaticResource TextSecondary}" />
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <Image Source="Assets/icon.ico" Width="40" Height="40" Margin="0,0,12,0" />
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="ETS2 Optimizer" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" />
+                    <TextBlock Text="Ottimizzazione automatica del config.cfg in base al tuo hardware" FontSize="12" Foreground="{StaticResource TextSecondary}" />
+                </StackPanel>
             </StackPanel>
-        </StackPanel>
+            <Button Grid.Column="1" x:Name="HelpButton" Content="? Come si usa" Style="{StaticResource PrimaryButton}" Click="HelpButton_Click" VerticalAlignment="Center" />
+        </Grid>
 
         <!-- Game running warning -->
         <Border Grid.Row="1" x:Name="GameRunningWarning" Background="#3A2A0E" BorderBrush="{StaticResource AccentYellow}" BorderThickness="1" CornerRadius="8" Padding="12,10" Margin="0,0,0,14" Visibility="Collapsed">

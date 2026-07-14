@@ -1,0 +1,82 @@
+<Window x:Class="Ets2Optimizer.InstructionsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Come si usa ETS2 Optimizer" Height="620" Width="620"
+        Background="#10162B"
+        FontFamily="Segoe UI"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="TextPrimary" Color="#EDF0F5" />
+        <SolidColorBrush x:Key="TextSecondary" Color="#9AA5C0" />
+        <SolidColorBrush x:Key="AccentBlue" Color="#2E86D9" />
+        <SolidColorBrush x:Key="CardBackground" Color="#171F3B" />
+        <SolidColorBrush x:Key="BorderColor" Color="#2A3560" />
+
+        <Style TargetType="Button" x:Key="PrimaryButton">
+            <Setter Property="Background" Value="{StaticResource AccentBlue}" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Padding" Value="18,10" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="StepTitle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+        <Style x:Key="StepBody" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextSecondary}" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Margin" Value="0,0,0,18" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <TextBlock Text="Guida rapida" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" Margin="0,0,0,16" />
+
+                <TextBlock Style="{StaticResource StepTitle}" Text="1. Chiudi Euro Truck Simulator 2 / American Truck Simulator" />
+                <TextBlock Style="{StaticResource StepBody}" Text="Il gioco tiene le impostazioni grafiche in memoria e le riscrive su config.cfg quando lo chiudi, sovrascrivendo qualsiasi modifica esterna fatta nel frattempo. Se il tool rileva il gioco aperto, ti avvisa e blocca l'applicazione delle modifiche." />
+
+                <TextBlock Style="{StaticResource StepTitle}" Text="2. Premi &quot;Rileva ed Analizza&quot;" />
+                <TextBlock Style="{StaticResource StepBody}" Text="Il programma rileva GPU (con VRAM reale), CPU e RAM, assegna un profilo (Low / Mid / High) e calcola quali impostazioni del config.cfg cambierebbero per adattarsi al tuo hardware. In questa fase NON viene ancora scritto nulla su disco." />
+
+                <TextBlock Style="{StaticResource StepTitle}" Text="3. Controlla la tabella &quot;Modifiche proposte&quot;" />
+                <TextBlock Style="{StaticResource StepBody}" Text="Per ogni parametro vedi il valore attuale, quello proposto e il motivo del cambiamento. Se la tabella resta vuota, il tuo config.cfg è già in linea con il profilo consigliato: non serve fare altro." />
+
+                <TextBlock Style="{StaticResource StepTitle}" Text="4. Premi &quot;Applica ottimizzazione&quot;" />
+                <TextBlock Style="{StaticResource StepBody}" Text="Ti verrà chiesta una conferma esplicita. Prima di scrivere qualsiasi modifica, il programma crea sempre una copia di backup con data e ora (es. config_backup_20260714_165551.cfg) nella stessa cartella del config.cfg." />
+
+                <TextBlock Style="{StaticResource StepTitle}" Text="5. Avvia il gioco e verifica gli FPS" />
+                <TextBlock Style="{StaticResource StepBody}" Text="Se qualcosa non ti convince (grafica troppo bassa, troppo alta, crash), chiudi il gioco e ripristina il backup: rinomina il file config_backup_*.cfg in config.cfg, sovrascrivendo quello modificato." />
+
+                <TextBlock Style="{StaticResource StepTitle}" Text="6. (Facoltativo) Copia i comandi di avvio Steam" />
+                <TextBlock Style="{StaticResource StepBody}" Text="Nella card &quot;Comandi di avvio Steam consigliati&quot; premi &quot;Copia&quot;, poi in Steam: tasto destro su Euro Truck Simulator 2 → Proprietà → Opzioni di avvio → incolla (Ctrl+V). Il programma non modifica mai Steam: sta a te incollarli." />
+
+                <TextBlock Style="{StaticResource StepTitle}" Text="Dove trovo i backup?" />
+                <TextBlock Style="{StaticResource StepBody}" Text="Nella stessa cartella del config.cfg, di solito Documenti\Euro Truck Simulator 2\ (o American Truck Simulator\). Ogni backup ha un nome con data e ora, quindi puoi tenerne più di uno senza sovrascriverli." />
+            </StackPanel>
+        </ScrollViewer>
+
+        <Button Grid.Row="1" Content="Ho capito, chiudi" Style="{StaticResource PrimaryButton}" HorizontalAlignment="Right" Margin="0,16,0,0" Click="CloseButton_Click" />
+    </Grid>
+</Window>

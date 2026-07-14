@@ -17,7 +17,25 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Loaded += (_, _) => DetectHardwareAndConfig();
+        Loaded += (_, _) =>
+        {
+            DetectHardwareAndConfig();
+            ShowInstructionsOnFirstRun();
+        };
+    }
+
+    private static void ShowInstructionsOnFirstRun()
+    {
+        var markerPath = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "Ets2Optimizer", "first_run_done");
+
+        if (File.Exists(markerPath)) return;
+
+        Directory.CreateDirectory(Path.GetDirectoryName(markerPath)!);
+        File.WriteAllText(markerPath, DateTime.Now.ToString("O"));
+
+        new InstructionsWindow().ShowDialog();
     }
 
     private void DetectHardwareAndConfig()
@@ -54,6 +72,11 @@ public partial class MainWindow : Window
     {
         Clipboard.SetText(LaunchOptionsText.Text);
         StatusText.Text = "Comandi di avvio copiati negli appunti. Incollali in Steam → Proprietà → Opzioni di avvio.";
+    }
+
+    private void HelpButton_Click(object sender, RoutedEventArgs e)
+    {
+        new InstructionsWindow { Owner = this }.ShowDialog();
     }
 
     private void AnalyzeButton_Click(object sender, RoutedEventArgs e)
